@@ -7,6 +7,8 @@ import os
 import telepot
 from telepot.namedtuple import ReplyKeyboardMarkup, ReplyKeyboardRemove
 from flask import Flask
+import pyodbc
+import logging
 
 f = []
 f.append(1368939191)
@@ -18,7 +20,10 @@ def handle(msg):
     if content_type == 'contact':
         print(content_type, chat_type, chat_id, msg['contact']['phone_number'])
         markup = ReplyKeyboardRemove()
+        phone_number = msg['phone_number']
         bot.sendMessage(chat_id, msg['contact']['phone_number'], reply_markup=markup)
+        contact_update(bot, chat_id, phone_number )
+        logger.setLevel(logging.INFO)
     else:
         print(content_type, chat_type, chat_id, msg['text'])
         if chat_id not in f:
@@ -27,6 +32,20 @@ def handle(msg):
             ])
             bot.sendMessage(chat_id, 'Для авторизации в приложении отправьте, пожалуйста, ваш номер телефона.', reply_markup=markup)
             return
+
+def contact_update(bot, chat_id, phone_number)
+
+    server = 'azure.database.windows.net'
+    database = 'azuredatabase'
+    username = 'azurerusername'
+    password = 'azurepassword'
+
+    driver= '{ODBC Driver 13 for SQL Server}'
+    cnxn= pyodbc.connect('DRIVER='+driver+';PORT=1433;SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD='+ password)
+    cursor = cnxn.cursor()
+    cursor.execute("update contact set chat_id = chat_id from contact where phone_number=phone_number")
+return
+
 
 #TOKEN = sys.argv[1]
 TOKEN = os.environ['TOKEN']
