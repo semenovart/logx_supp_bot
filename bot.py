@@ -20,6 +20,7 @@ def handle(msg):
     if content_type == 'contact':
         print(content_type, chat_type, chat_id, msg['contact']['phone_number'])
         markup = ReplyKeyboardRemove()
+        phone_number = msg['phone_number']
         bot.sendMessage(chat_id, msg['contact']['phone_number'], reply_markup=markup)
         contact_update(bot, chat_id, phone_number )
         logger.setLevel(logging.INFO)
