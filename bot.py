@@ -25,8 +25,8 @@ def handle(msg):
             bot.sendMessage(chat_id, 'Для авторизации в приложении отправьте, пожалуйста, ваш номер телефона.', reply_markup=markup)
             return
 
-TOKEN = sys.argv[1]
-
+#TOKEN = sys.argv[1]
+TOKEN = os.environ['TOKEN']
 bot = telepot.Bot(TOKEN)
 
 bot.message_loop(handle)
