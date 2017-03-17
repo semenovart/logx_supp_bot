@@ -9,7 +9,8 @@ from telepot.namedtuple import ReplyKeyboardMarkup, ReplyKeyboardRemove
 from flask import Flask
 
 f = []
-f.append(1368939191, 125969275)
+f.append(1368939191)
+f.append(125969275)
 
 
 def handle(msg):
