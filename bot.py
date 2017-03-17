@@ -3,6 +3,7 @@
 # vim: set fileencoding=utf-8 :
 import time
 import sys
+import os
 import telepot
 from telepot.namedtuple import ReplyKeyboardMarkup, ReplyKeyboardRemove
 
