@@ -1,3 +1,6 @@
+# coding=utf-8
+# -*- coding: utf-8 -*-
+# vim: set fileencoding=utf-8 :
 import time
 import sys
 import telepot
