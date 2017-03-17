@@ -6,9 +6,10 @@ import sys
 import os
 import telepot
 from telepot.namedtuple import ReplyKeyboardMarkup, ReplyKeyboardRemove
+from flask import Flask
 
 f = []
-f.append(1368939191)
+f.append(1368939191, 125969275)
 
 
 def handle(msg):
@@ -30,9 +31,21 @@ def handle(msg):
 TOKEN = os.environ['TOKEN']
 bot = telepot.Bot(TOKEN)
 
+
+
 bot.message_loop(handle)
 print('Listening ...')
 
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return 'Hello World!'
+
+if __name__ == '__main__':
+    # Bind to PORT if defined, otherwise default to 5000.
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
 
 while 1:
     time.sleep(100)
